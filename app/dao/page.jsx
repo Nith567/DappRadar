@@ -9,7 +9,7 @@ import {
   PaymasterMode
 } from '@biconomy/paymaster'
 import axios from 'axios';
-import dao from "../utils/abi.json"
+import abi from "../utils/abi.json"
 import { toast } from "react-hot-toast";
 import { BiconomySmartAccount, BiconomySmartAccountV2 } from "@biconomy/account"
     const AddressB ='0x8d68EC7C3B0D43174E181113643203A7287D1fA0'
@@ -47,7 +47,7 @@ useEffect(() => {
 const contributeMint = async () => {
   const contract = new ethers.Contract(
     AddressB,
-     dao,
+     abi,
     provider,
   )
   try {
@@ -89,7 +89,7 @@ const contributeMint = async () => {
 const proposeMint = async () => {
   const contract = new ethers.Contract(
     AddressB,
-     dao,
+     abi,
     provider,
   )
   try {
@@ -128,10 +128,10 @@ const proposeMint = async () => {
 
 
 
-const voteMint= async (proposalId, choosen) => {
+const voteMint= async ({proposalId},{ choosen}) => {
   const contract = new ethers.Contract(
     AddressB,
-     dao,
+     abi,
     provider,
   )
   try {
@@ -168,10 +168,10 @@ const voteMint= async (proposalId, choosen) => {
   }
 }
 
-const payBeneficiaryMint= async (proposalId) => {
+const payBeneficiaryMint= async ({proposalId}) => {
   const contract = new ethers.Contract(
     AddressB,
-     dao,
+     abi,
     provider,
   )
   try {
@@ -208,7 +208,6 @@ const payBeneficiaryMint= async (proposalId) => {
   }
 }
  const handlePayBeneficiarymint = () => {
-    const { contract } = state;
     // Call the payBeneficiary function with the proposalId
     if (proposalId) {
       payBeneficiaryMint(proposalId);
@@ -220,7 +219,7 @@ const payBeneficiaryMint= async (proposalId) => {
   const fetchPropMint= async()=> {
     const contract = new ethers.Contract(
       AddressB,
-       dao,
+       abi,
       provider,
     )
     try {
@@ -275,7 +274,7 @@ const payBeneficiaryMint= async (proposalId) => {
   
       <button
             className="p-2 bg-zinc-400 hover:bg-zinc-700 text-white font-semibold rounded text-center text-3xl m-3"
-            onClick={contributeMint()}
+            onClick={contributeMint}
           >
             Contribute
           </button>
@@ -394,7 +393,7 @@ const payBeneficiaryMint= async (proposalId) => {
       <h2 className="text-2xl font-bold mb-4">
         Proposals
       </h2>
-      <button className="bg-purple-500 hover:bg-blue-600 text-white font-semibold p-2 rounded-md "onClick={fetchPropMint}>Fetch Proposals</button>
+      <button className="bg-purple-500 hover:bg-blue-600 text-white font-semibold p-2 rounded-md "onClick={fetchPropMint()}>Fetch Proposals</button>
       <div className="grid grid-cols-2 gap-1">
       <div className="overflow-x-auto flex justify-center">
   <div className="overflow-x-auto">
