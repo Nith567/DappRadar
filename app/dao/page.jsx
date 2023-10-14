@@ -12,7 +12,7 @@ import axios from 'axios';
 import abi from "../utils/abi.json"
 import { toast } from "react-hot-toast";
 import { BiconomySmartAccount, BiconomySmartAccountV2 } from "@biconomy/account"
-    const AddressB ='0x8d68EC7C3B0D43174E181113643203A7287D1fA0'
+    const AddressB ='0xc588fcdda38222b29beedcc037e2e597c4aab53e'
 function DaoApp({ smartAccount, address, provider }) {
   const [minted, setMinted] = useState(false)
       const [title, setTitle] = useState('');
@@ -51,7 +51,7 @@ const contributeMint = async () => {
     provider,
   )
   try {
-    const insertTx = await contract.populateTransaction.contribute({ value: ethers.utils.parseEther('0.02') });
+    const insertTx = await contract.contribute({ value: ethers.utils.parseEther('0.02') });
     console.log(insertTx.data);
     const tx1 = {
       to: AddressB,
@@ -128,7 +128,7 @@ const proposeMint = async () => {
 
 
 
-const voteMint= async ({proposalId},{ choosen}) => {
+const voteMint= async (proposalId,choosen) => {
   const contract = new ethers.Contract(
     AddressB,
      abi,
@@ -168,7 +168,7 @@ const voteMint= async ({proposalId},{ choosen}) => {
   }
 }
 
-const payBeneficiaryMint= async ({proposalId}) => {
+const payBeneficiaryMint= async (proposalId) => {
   const contract = new ethers.Contract(
     AddressB,
      abi,
@@ -261,7 +261,8 @@ const payBeneficiaryMint= async ({proposalId}) => {
     }
   }
   return (
-    <>
+    <> 
+    {address}
       <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">Values:</h1>
       <ul>
